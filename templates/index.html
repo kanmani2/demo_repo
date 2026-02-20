@@ -44,6 +44,25 @@
             align-items: center;
         }
 
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-image {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e74c3c;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.1);
+        }
+
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
@@ -163,7 +182,8 @@
             height: 200px;
             border-radius: 50%;
             margin: 0 auto 2rem;
-            background: url('images/oggy.jpeg')  center/cover;
+            background-size: cover;
+            background-position: center;
             border: 5px solid rgba(255,255,255,0.3);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: transform 0.3s ease;
@@ -264,7 +284,8 @@
         .about-image {
             width: 100%;
             height: 400px;
-            background: url('images/oggy.jpeg') center/cover;
+            background-size: cover;
+            background-position: center;
             border-radius: 15px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
@@ -361,7 +382,8 @@
         .achievement-image {
             width: 100%;
             height: 200px;
-            background: url('images/cg_1.jpeg') center/cover;
+            background-size: cover;
+            background-position: center;
             border-radius: 10px;
             margin-bottom: 1.5rem;
         }
@@ -410,20 +432,10 @@
             transform: scale(1.05);
         }
 
-        .gallery-item:nth-child(1) {
-            background: url('images/cg_2.jpeg') center/cover;
-        }
-
-        .gallery-item:nth-child(2) {
-            background: url('images/cg_3.jpeg') center/cover;
-        }
-
-        .gallery-item:nth-child(3) {
-            background: url('images/cg_4.jpeg') center/cover;
-        }
-
-        .gallery-item:nth-child(4) {
-            background: url('images/oggy.jpeg') center/cover;
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Contact Section */
@@ -555,36 +567,16 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Scroll Animations */
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <nav class="container">
-            <a href="#home" class="logo">Kanmani</a>
+            <div class="logo-container">
+                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kanmani Logo" class="logo-image">
+                <a href="#home" class="logo">Kanmani</a>
+            </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -604,8 +596,8 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <div class="hero-image"></div>
-            <h1>Hi, I'm Kanmani</h1>
+            <div class="hero-image" style="background-image: url('{{ url_for('static', filename='images/logo.png') }}');"></div>
+            <h1>Hi, I'm Kanmanii</h1>
             <p>BCA Graduate & DEVOPS Enthusiast</p>
             <a href="#about" class="cta-button">Learn More About Me</a>
         </div>
@@ -616,7 +608,7 @@
         <div class="container">
             <h2 class="section-title fade-in">About Me</h2>
             <div class="about-content fade-in">
-                <div class="about-image"></div>
+                <div class="about-image" style="background-image: url('{{ url_for('static', filename='images/oggy.jpeg') }}');"></div>
                 <div class="about-text">
                     <h3>Passionate About Technology & Sports</h3>
                     <p>Hello! I'm Kanmani, a dedicated BCA graduate with a passion for technology and an exceptional talent in throwball. My journey combines academic excellence in computer applications with outstanding achievements in sports at both state and national levels.</p>
@@ -647,21 +639,21 @@
             <h2 class="section-title fade-in">Throwball Achievements</h2>
             <div class="achievements-grid">
                 <div class="achievement-card fade-in">
-                    <div class="achievement-image"></div>
+                    <div class="achievement-image" style="background-image: url('{{ url_for('static', filename='images/cg_1.jpeg') }}');"></div>
                     <div class="medal-icon gold">🏆</div>
                     <h3>National Level Championships</h3>
                     <p>Multiple victories at national level throwball competitions, representing my state with pride and bringing home prestigious awards.</p>
                 </div>
                 
                 <div class="achievement-card fade-in">
-                    <div class="achievement-image"></div>
+                    <div class="achievement-image" style="background-image: url('{{ url_for('static', filename='images/cg_1.jpeg') }}');"></div>
                     <div class="medal-icon gold">🥇</div>
                     <h3>State Level Victories</h3>
                     <p>Consistent performance at state level competitions, securing numerous gold medals and establishing myself as a formidable throwball player.</p>
                 </div>
                 
                 <div class="achievement-card fade-in">
-                    <div class="achievement-image"></div>
+                    <div class="achievement-image" style="background-image: url('{{ url_for('static', filename='images/cg_1.jpeg') }}');"></div>
                     <div class="medal-icon silver">🏅</div>
                     <h3>Team Leadership</h3>
                     <p>Led various throwball teams to victory, developing leadership skills and fostering team spirit that contributed to our collective success.</p>
@@ -675,10 +667,18 @@
         <div class="container">
             <h2 class="section-title fade-in">Gallery</h2>
             <div class="gallery-grid fade-in">
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/cg_2.jpeg') }}" alt="Gallery Image 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/cg_3.jpeg') }}" alt="Gallery Image 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/cg_4.jpeg') }}" alt="Gallery Image 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/oggy.jpeg') }}" alt="Gallery Image 4">
+                </div>
             </div>
         </div>
     </section>
@@ -783,6 +783,8 @@
         
         galleryItems.forEach(item => {
             item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                
                 // Create modal overlay
                 const modal = document.createElement('div');
                 modal.style.cssText = `
@@ -799,15 +801,12 @@
                     cursor: pointer;
                 `;
                 
-                const modalImg = document.createElement('div');
+                const modalImg = document.createElement('img');
+                modalImg.src = imgSrc;
                 modalImg.style.cssText = `
-                    width: 90%;
-                    max-width: 800px;
-                    height: 80%;
-                    background: ${window.getComputedStyle(this).background};
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    background-position: center;
+                    max-width: 90%;
+                    max-height: 80%;
+                    object-fit: contain;
                     border-radius: 10px;
                 `;
                 
@@ -861,38 +860,6 @@
                 heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
             }
         });
-
-        // Add counter animation for achievements
-        function animateCounter(element, target, duration = 2000) {
-            let start = 0;
-            const increment = target / (duration / 16);
-            
-            function updateCounter() {
-                start += increment;
-                if (start < target) {
-                    element.textContent = Math.floor(start);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = target;
-                }
-            }
-            updateCounter();
-        }
-
-        // Initialize counters when achievements section is visible
-        const achievementsSection = document.querySelector('#achievements');
-        const achievementsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Add any counter animations here if needed
-                    achievementsObserver.unobserve(entry.target);
-                }
-            });
-        });
-
-        if (achievementsSection) {
-            achievementsObserver.observe(achievementsSection);
-        }
     </script>
 </body>
 </html>
